@@ -12,8 +12,17 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path, os
 #from dotenv import load_dotenv
+from decouple import config
+
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 import os
+
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+#BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+'''print('base dir:', BASE_DIR)
 
 print("DIRS configurados para templates no settings.py:")
 print([os.path.join(BASE_DIR, 'templates')])
@@ -22,7 +31,7 @@ from django.template.utils import get_app_template_dirs
 
 print("\nDjango está procurando templates automaticamente nos seguintes diretórios dos apps:")
 for directory in get_app_template_dirs('templates'):
-    print(directory)
+    print(directory)''' #add para test
 
 
 
@@ -30,7 +39,7 @@ for directory in get_app_template_dirs('templates'):
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 #BASE_DIR = Path(__file__).resolve().parent.parent 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
 
 
 
@@ -38,7 +47,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = str(os.getenv('SECRET_KEY'))
+#SECRET_KEY = str(os.getenv('SECRET_KEY'))
+SECRET_KEY = config('SECRET_KEY', default='default-secret-key-for-dev')
+
+if not SECRET_KEY:
+    raise ValueError("A variável de ambiente SECRET_KEY não está definida.") # add para test
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -95,7 +108,7 @@ WSGI_APPLICATION = 'Pro-setup.setup.wsgi.application' #'setup.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': BASE_DIR /'db.sqlite3',
     }
 }
 
@@ -140,3 +153,6 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+print("SECRET_KEY:", SECRET_KEY)
+
