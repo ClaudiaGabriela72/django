@@ -13,11 +13,25 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from pathlib import Path, os
 #from dotenv import load_dotenv
 
+import os
+
+print("DIRS configurados para templates no settings.py:")
+print([os.path.join(BASE_DIR, 'templates')])
+
+from django.template.utils import get_app_template_dirs
+
+print("\nDjango está procurando templates automaticamente nos seguintes diretórios dos apps:")
+for directory in get_app_template_dirs('templates'):
+    print(directory)
+
+
 
 #load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+#BASE_DIR = Path(__file__).resolve().parent.parent 
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
 
 
 # Quick-start development settings - unsuitable for production
