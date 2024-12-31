@@ -30,10 +30,6 @@ main {
 
 #login {
     position: absolute;
-    /*top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    overflow: hidden;*/
     background-color: white;
     width: 250px;
     height: 500px;
@@ -46,11 +42,12 @@ main {
 
 #imagem {
     display: block;
-    background: #5f2c82 url(../imagens/pexels-scottwebb-1029611.jpg) no-repeat;
+    background: #5f2c82 url(../img/pexels-scottwebb-1029611.jpg) no-repeat;
     background-position: left bottom;
     background-size: cover;
     height: 200px;
 }
+
 
 #formulario{
     display: block;
